@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Asterisk, Command, Github, Instagram, Linkedin, Menu, MoveUpRight, X } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Asterisk, Command, Github, Menu, MoveUpRight, X } from "lucide-react";
 
 const projects = [
   { id: "01", name: "KARKI AI", type: "AI / PRODUCT", note: "Featured project", position: "window-one" },
@@ -110,26 +110,26 @@ export default function Home() {
           <motion.h1 initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: .045, delayChildren: .25 } } }}>
             {"SARWZYA".split("").map((letter, i) => <motion.span key={i} variants={{ hidden: { y: "110%", opacity: 0, filter: "blur(12px)" }, visible: { y: "0%", opacity: 1, filter: "blur(0px)", transition: { duration: .9, ease: [0.16, 1, 0.3, 1] } } }}>{letter}</motion.span>)}
           </motion.h1>
-          <div className="hero-second-line"><motion.h1 className="outline-name" initial={{ clipPath: "inset(0 100% 0 0)" }} animate={{ clipPath: "inset(0 0% 0 0)" }} transition={{ delay: .75, duration: 1.15, ease: [0.76, 0, 0.24, 1] }}>KARKI<span className="acid">.</span></motion.h1><motion.p initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.1, duration: .8 }}>I MAKE THE<br />INTERNET FEEL<br /><em>DIFFERENT.</em></motion.p></div>
+          <div className="hero-second-line"><motion.h1 className="outline-name" initial={{ clipPath: "inset(0 100% 0 0)" }} animate={{ clipPath: "inset(0 0% 0 0)" }} transition={{ delay: .75, duration: 1.15, ease: [0.76, 0, 0.24, 1] }}>KARKI<span className="acid">.</span></motion.h1><motion.p initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.1, duration: .8 }}>I DESIGN<br />WHAT COMES<br /><em>NEXT.</em></motion.p></div>
         </div>
         <div className="hero-bottom"><span className="hero-asterisk"><Asterisk size={18} /> DESIGN-LED DEVELOPMENT</span><p>Curiosity first. Craft always.<br />Building ideas into digital experiences.</p><a href="#work" className="scroll-cue"><span>SCROLL TO EXPLORE</span><ArrowDown size={16} /></a></div>
         <div className="hero-side-index">PORTFOLIO / 001 — 026</div>
       </section>
 
-      <div className="ticker" aria-hidden="true"><div className="ticker-track">{Array.from({ length: 4 }).map((_, i) => <span key={i}>DESIGN WITH INTENT <b>✳</b> CODE WITH CURIOSITY <b>✳</b> MAKE SOMETHING MATTER <b>✳</b></span>)}</div></div>
+      <section className="manifesto-section"><div className="manifesto-index">A POINT OF VIEW / 001</div><p className="manifesto-line">THE INTERNET<br /><span>DOESN’T NEED</span><br />MORE OF THE <em>SAME.</em></p><div className="manifesto-bottom"><span>DESIGN × CODE × INTERACTION</span><p>Distinct digital experiences, built with intention — from the first sketch to the final interaction.</p></div></section>\n\n      <div className="ticker" aria-hidden="true"><div className="ticker-track">{Array.from({ length: 4 }).map((_, i) => <span key={i}>DESIGN WITH INTENT <b>✳</b> CODE WITH CURIOSITY <b>✳</b> MAKE SOMETHING MATTER <b>✳</b></span>)}</div></div>
 
       <FloatingUniverse />
 
       <section id="about" className="about-section scroll-reveal">
         <div className="section-topline"><span>02 / THE PERSON BEHIND THE PIXELS</span><span>A SHORT INTRODUCTION</span></div>
-        <div className="about-grid"><div className="about-stamp"><Command size={26} /><span>THINK<br />MAKE<br />REFINE</span><Asterisk size={34} /></div><div className="about-copy"><p className="eyebrow">A LITTLE ABOUT ME</p><h2>NOT HERE TO<br />MAKE MORE OF<br /><span>THE SAME.</span></h2><p className="about-description">I’m Sarwzya Karki. I’m interested in the intersection of design, technology and interaction — exploring how thoughtful details can turn a website into an experience.</p><p className="about-placeholder">This introduction is editable. Add a personal story and verified background here.</p></div></div>
+        <div className="about-grid"><div className="about-stamp"><Command size={26} /><span>THINK<br />MAKE<br />REFINE</span><Asterisk size={34} /></div><div className="about-copy"><p className="eyebrow">A LITTLE ABOUT ME</p><h2>NOT HERE TO<br />MAKE MORE OF<br /><span>THE SAME.</span></h2><p className="about-description">I’m Sarwzya Karki. I’m interested in the intersection of design, technology and interaction — exploring how thoughtful details can turn a website into an experience.</p></div></div>
       </section>
 
-      <section className="toolkit-section scroll-reveal"><div className="section-topline"><span>03 / CREATIVE TOOLKIT</span><span>TOOLS ARE ONLY THE START</span></div><div className="toolkit-layout"><h2>THE<br /><span>TOOLBOX.</span></h2><div className="toolkit-list"><div><span>01</span><p>FRONTEND DEVELOPMENT</p><small>Next.js · React · TypeScript</small></div><div><span>02</span><p>MOTION & INTERACTION</p><small>GSAP · Framer Motion</small></div><div><span>03</span><p>DESIGN & PROTOTYPING</p><small>Tools and proficiency to be confirmed</small></div></div></div></section>
+      <section className="toolkit-section scroll-reveal"><div className="section-topline"><span>03 / CREATIVE TOOLKIT</span><span>TOOLS ARE ONLY THE START</span></div><div className="toolkit-layout"><h2>THE<br /><span>TOOLBOX.</span></h2><div className="toolkit-list"><div><span>01</span><p>FRONTEND DEVELOPMENT</p><small>Next.js · React · TypeScript</small></div><div><span>02</span><p>MOTION & INTERACTION</p><small>GSAP · Framer Motion</small></div><div><span>03</span><p>DESIGN & PROTOTYPING</p><small>Visual systems · interface design · prototyping</small></div></div></div></section>
 
-      <section id="contact" className="contact-section scroll-reveal"><div className="section-topline"><span>04 / START A CONVERSATION</span><span>THE NEXT THING STARTS HERE</span></div><p className="eyebrow">HAVE SOMETHING INTERESTING IN MIND?</p><h2>LET’S MAKE<br /><span>IT MATTER.</span></h2><p className="contact-note">Have an idea, a question, or something worth building? Reach out.</p><span className="contact-link contact-link-pending">CONTACT LINK TO BE ADDED <MoveUpRight size={17} /></span></section>
+      <section id="contact" className="contact-section scroll-reveal"><div className="section-topline"><span>04 / START A CONVERSATION</span><span>THE NEXT THING STARTS HERE</span></div><p className="eyebrow">HAVE SOMETHING INTERESTING IN MIND?</p><h2>LET’S MAKE<br /><span>IT MATTER.</span></h2><p className="contact-note">Have an idea, a question, or something worth building? Reach out.</p><a className="contact-link" href="https://github.com/karkihubbb" target="_blank" rel="noreferrer">FIND ME ON GITHUB <MoveUpRight size={17} /></a></section>
 
-      <footer className="site-footer"><a className="brand-mark" href="#top">SK<span>®</span></a><span>© 2026 SARWZYA KARKI</span><span>MADE WITH INTENTION <b>✳</b></span><div className="social-links"><a href="https://github.com/karkihubbb" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={16} /></a><a href="#contact" aria-label="Instagram link to be added"><Instagram size={16} /></a><a href="#contact" aria-label="LinkedIn link to be added"><Linkedin size={16} /></a></div></footer>
+      <footer className="site-footer"><a className="brand-mark" href="#top">SK<span>®</span></a><span>© 2026 SARWZYA KARKI</span><span>MADE WITH INTENTION <b>✳</b></span><div className="social-links"><a href="https://github.com/karkihubbb" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={16} /></a></div></footer>
     </main>
   );
 }
