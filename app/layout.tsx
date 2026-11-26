@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Sarwzya Karki — Creative Developer",
-  description: "The personal portfolio of Sarwzya Karki.",
+  description: "The portfolio of Sarwzya Karki: selected work, creative development and digital experiences.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
