@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Github, Menu, X } from "lucide-react";
 
 function PlanetScene() {
@@ -252,14 +252,14 @@ function PlanetScene() {
 
 const reveal = {
   hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 0.7, 0.2, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 0.7, 0.2, 1] as const } },
 };
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const reducedMotion = useReducedMotion();
 
-  const enter = reducedMotion ? { hidden: {}, visible: {} } : reveal;
+  const enter: Variants = reducedMotion ? { hidden: {}, visible: {} } : reveal;
 
   return (
     <main className="portfolio-shell" id="top">
