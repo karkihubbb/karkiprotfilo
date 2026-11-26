@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { ReactNode } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowDownRight, ArrowUpRight, ArrowRight, Menu, X } from "lucide-react";
 
@@ -9,7 +10,7 @@ const reveal: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
-function BrowserWindow({ className = "", children }: { className?: string; children: React.ReactNode }) {
+function BrowserWindow({ className = "", children }: { className?: string; children: ReactNode }) {
   return (
     <div className={`browser-window ${className}`}>
       <div className="browser-bar">
@@ -25,7 +26,7 @@ function BrowserWindow({ className = "", children }: { className?: string; child
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const reducedMotion = useReducedMotion();
-  const enter = reducedMotion ? { hidden: {}, visible: {} } : reveal;
+  const enter: Variants = reducedMotion ? { hidden: {}, visible: {} } : reveal;
 
   return (
     <main className="portfolio" id="top">
