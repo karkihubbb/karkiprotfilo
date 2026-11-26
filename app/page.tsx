@@ -63,8 +63,8 @@ function FloatingUniverse() {
             <button className="dialog-close" onClick={() => setActive(null)} aria-label="Close project"><X size={20} /></button>
             <span className="eyebrow">PROJECT / {active}</span>
             <h3>{active === "01" ? "KARKI AI" : active === "02" ? "PROJECT TWO" : "PROJECT THREE"}</h3>
-            <p>{active === "01" ? "The featured project. Its real screenshots, description, technology details and destination link will be added when supplied." : "This is an editable project slot. Add a real project and its actual preview before publishing it."}</p>
-            <span className="dialog-status">CONTENT STATUS — AWAITING VERIFIED ASSETS</span>
+            <p>{active === "01" ? "Karki AI is a live project. Explore the actual product and its current interface." : "This is an editable project slot. Add a real project and its actual preview before publishing it."}</p>
+            <span className="dialog-status">LIVE PROJECT · KARKIAI.ONRENDER.COM</span>{active === "01" && <a className="dialog-visit" href="https://karkiai.onrender.com/" target="_blank" rel="noreferrer">VISIT LIVE PROJECT <MoveUpRight size={16} /></a>}
           </motion.div>
         </motion.div>}
       </AnimatePresence>
