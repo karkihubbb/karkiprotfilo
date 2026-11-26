@@ -57,7 +57,7 @@ export default function Home() {
         <div className="mx-auto max-w-[1400px]">
           <p className="mb-8 text-[10px] uppercase tracking-[.2em] text-[#d5ff3f]">03 / Get in touch</p>
           <h2 className="max-w-5xl text-[clamp(3.4rem,10vw,9rem)] font-semibold leading-[.82] tracking-[-.09em]">HAVE AN IDEA?<br /><span className="outline-text">LET&apos;S MAKE IT.</span></h2>
-          <a href="mailto:hello@karkiprotfilo.com" className="mt-12 inline-flex items-center gap-3 border-b border-[#d5ff3f] pb-3 text-sm text-[#d5ff3f] transition hover:gap-6">Start a conversation <MoveUpRight size={16} /></a>
+          <a href="#about" className="mt-12 inline-flex items-center gap-3 border-b border-[#d5ff3f] pb-3 text-sm text-[#d5ff3f] transition hover:gap-6">Contact details coming soon <MoveUpRight size={16} /></a>
         </div>
       </section>
 
