@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Asterisk, Command, Github, Instagram, Linkedin, Menu, MoveUpRight, X } from "lucide-react";
 
@@ -78,6 +80,15 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [time, setTime] = useState("");
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const elements = gsap.utils.toArray<HTMLElement>(".scroll-reveal");
+    elements.forEach((element) => {
+      gsap.fromTo(element, { y: 42, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 86%", once: true } });
+    });
+    return () => { ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); };
+  }, []);
+
+  useEffect(() => {
     const update = () => setTime(new Intl.DateTimeFormat("en", { timeZone: "Asia/Kathmandu", hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date()));
     update(); const id = window.setInterval(update, 60000); return () => window.clearInterval(id);
   }, []);
@@ -109,14 +120,14 @@ export default function Home() {
 
       <FloatingUniverse />
 
-      <section id="about" className="about-section">
+      <section id="about" className="about-section scroll-reveal">
         <div className="section-topline"><span>02 / THE PERSON BEHIND THE PIXELS</span><span>A SHORT INTRODUCTION</span></div>
         <div className="about-grid"><div className="about-stamp"><Command size={26} /><span>THINK<br />MAKE<br />REFINE</span><Asterisk size={34} /></div><div className="about-copy"><p className="eyebrow">A LITTLE ABOUT ME</p><h2>NOT HERE TO<br />MAKE MORE OF<br /><span>THE SAME.</span></h2><p className="about-description">I’m Sarwzya Karki. I’m interested in the intersection of design, technology and interaction — exploring how thoughtful details can turn a website into an experience.</p><p className="about-placeholder">This introduction is editable. Add a personal story and verified background here.</p></div></div>
       </section>
 
-      <section className="toolkit-section"><div className="section-topline"><span>03 / CREATIVE TOOLKIT</span><span>TOOLS ARE ONLY THE START</span></div><div className="toolkit-layout"><h2>THE<br /><span>TOOLBOX.</span></h2><div className="toolkit-list"><div><span>01</span><p>FRONTEND DEVELOPMENT</p><small>Next.js · React · TypeScript</small></div><div><span>02</span><p>MOTION & INTERACTION</p><small>GSAP · Framer Motion</small></div><div><span>03</span><p>DESIGN & PROTOTYPING</p><small>Tools and proficiency to be confirmed</small></div></div></div></section>
+      <section className="toolkit-section scroll-reveal"><div className="section-topline"><span>03 / CREATIVE TOOLKIT</span><span>TOOLS ARE ONLY THE START</span></div><div className="toolkit-layout"><h2>THE<br /><span>TOOLBOX.</span></h2><div className="toolkit-list"><div><span>01</span><p>FRONTEND DEVELOPMENT</p><small>Next.js · React · TypeScript</small></div><div><span>02</span><p>MOTION & INTERACTION</p><small>GSAP · Framer Motion</small></div><div><span>03</span><p>DESIGN & PROTOTYPING</p><small>Tools and proficiency to be confirmed</small></div></div></div></section>
 
-      <section id="contact" className="contact-section"><div className="section-topline"><span>04 / START A CONVERSATION</span><span>THE NEXT THING STARTS HERE</span></div><p className="eyebrow">HAVE SOMETHING INTERESTING IN MIND?</p><h2>LET’S MAKE<br /><span>IT MATTER.</span></h2><p className="contact-note">Have an idea, a question, or something worth building? Reach out.</p><a className="contact-link" href="mailto:">EMAIL ADDRESS TO BE ADDED <MoveUpRight size={17} /></a></section>
+      <section id="contact" className="contact-section scroll-reveal"><div className="section-topline"><span>04 / START A CONVERSATION</span><span>THE NEXT THING STARTS HERE</span></div><p className="eyebrow">HAVE SOMETHING INTERESTING IN MIND?</p><h2>LET’S MAKE<br /><span>IT MATTER.</span></h2><p className="contact-note">Have an idea, a question, or something worth building? Reach out.</p><span className="contact-link contact-link-pending">CONTACT LINK TO BE ADDED <MoveUpRight size={17} /></span></section>
 
       <footer className="site-footer"><a className="brand-mark" href="#top">SK<span>®</span></a><span>© 2026 SARWZYA KARKI</span><span>MADE WITH INTENTION <b>✳</b></span><div className="social-links"><a href="https://github.com/karkihubbb" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={16} /></a><a href="#contact" aria-label="Instagram link to be added"><Instagram size={16} /></a><a href="#contact" aria-label="LinkedIn link to be added"><Linkedin size={16} /></a></div></footer>
     </main>
