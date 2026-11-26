@@ -1,67 +1,124 @@
-import { ArrowDownRight, ArrowUpRight, Asterisk, MoveUpRight } from "lucide-react";
+"use client";
 
-const nav = [{ label: "Work", href: "#work" }, { label: "About", href: "#about" }, { label: "Contact", href: "#contact" }];
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
+import { ArrowDown, ArrowUpRight, Asterisk, Command, Github, Instagram, Linkedin, Menu, MoveUpRight, X } from "lucide-react";
+
+const projects = [
+  { id: "01", name: "KARKI AI", type: "AI / PRODUCT", note: "Featured project", position: "window-one" },
+  { id: "02", name: "PROJECT TWO", type: "EXPERIMENT / WEB", note: "Preview awaiting real project asset", position: "window-two" },
+  { id: "03", name: "PROJECT THREE", type: "INTERACTIVE / LAB", note: "Preview awaiting real project asset", position: "window-three" },
+];
+
+function FloatingUniverse() {
+  const area = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<string | null>(null);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const sx = useSpring(mx, { stiffness: 55, damping: 20 });
+  const sy = useSpring(my, { stiffness: 55, damping: 20 });
+
+  useEffect(() => {
+    const node = area.current;
+    if (!node) return;
+    const move = (event: MouseEvent) => {
+      const rect = node.getBoundingClientRect();
+      mx.set((event.clientX - rect.left - rect.width / 2) / rect.width);
+      my.set((event.clientY - rect.top - rect.height / 2) / rect.height);
+    };
+    const leave = () => { mx.set(0); my.set(0); };
+    node.addEventListener("mousemove", move);
+    node.addEventListener("mouseleave", leave);
+    return () => { node.removeEventListener("mousemove", move); node.removeEventListener("mouseleave", leave); };
+  }, [mx, my]);
+
+  return (
+    <section id="work" className="universe-section">
+      <div className="section-topline"><span>01 / SELECTED WORK</span><span>AN OPEN CANVAS — 2026</span></div>
+      <div className="universe-heading"><p>MADE TO MOVE.</p><h2>WORK<span> / </span>IN<br className="mobile-break" /> PROGRESS<span className="acid">.</span></h2></div>
+      <div ref={area} className="universe-stage">
+        <motion.div className="universe-orbit" style={{ x: sx, y: sy }}>
+          <div className="orbit-ring ring-a" /><div className="orbit-ring ring-b" />
+          <motion.button className="browser-window window-one" onClick={() => setActive("01")} whileHover={{ scale: 1.035, zIndex: 8 }} animate={{ y: [0, -13, 0], rotate: [-5, -3.5, -5] }} transition={{ y: { duration: 7, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 9, repeat: Infinity, ease: "easeInOut" } }}>
+            <BrowserBar title="karki-ai / overview" />
+            <div className="preview-karki"><span className="preview-index">01 — FEATURED PROJECT</span><div className="preview-karki-title">KARKI<br /><i>AI.</i></div><div className="preview-karki-foot"><span>PRODUCT / AI</span><span>OPEN PROJECT ↗</span></div></div>
+          </motion.button>
+          <motion.button className="browser-window window-two" onClick={() => setActive("02")} whileHover={{ scale: 1.04, zIndex: 8 }} animate={{ y: [0, 15, 0], rotate: [7, 5, 7] }} transition={{ y: { duration: 8, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 10, repeat: Infinity, ease: "easeInOut" } }}>
+            <BrowserBar title="project-preview / 02" /><div className="preview-empty"><span>02</span><div className="preview-empty-mark">＋</div><p>REAL PROJECT<br />PREVIEW NEEDED</p><small>ASSET SLOT / 02</small></div>
+          </motion.button>
+          <motion.button className="browser-window window-three" onClick={() => setActive("03")} whileHover={{ scale: 1.04, zIndex: 8 }} animate={{ y: [0, -9, 0], rotate: [-2, 0, -2] }} transition={{ y: { duration: 6.5, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}>
+            <BrowserBar title="experiment / 03" /><div className="preview-empty preview-empty-light"><span>03</span><div className="preview-empty-mark">＋</div><p>ANOTHER IDEA<br />IN THE MAKING</p><small>ASSET SLOT / 03</small></div>
+          </motion.button>
+        </motion.div>
+        <div className="universe-note note-left"><span className="note-dot" /> DRAG YOUR CURSOR<br />THROUGH THE SPACE</div>
+        <div className="universe-note note-right">SELECT A WINDOW<br />TO INSPECT <ArrowUpRight size={14} /></div>
+        <div className="universe-crosshair">✳</div>
+      </div>
+      <div className="universe-caption"><span>THREE WINDOWS / ONE CREATIVE UNIVERSE</span><span>PROJECTS OPEN AS THEY BECOME REAL</span></div>
+      <AnimatePresence>
+        {active && <motion.div className="project-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <motion.div className="project-dialog" initial={{ y: 40, scale: .97 }} animate={{ y: 0, scale: 1 }} exit={{ y: 20, scale: .98 }}>
+            <button className="dialog-close" onClick={() => setActive(null)} aria-label="Close project"><X size={20} /></button>
+            <span className="eyebrow">PROJECT / {active}</span>
+            <h3>{active === "01" ? "KARKI AI" : active === "02" ? "PROJECT TWO" : "PROJECT THREE"}</h3>
+            <p>{active === "01" ? "The featured project. Its real screenshots, description, technology details and destination link will be added when supplied." : "This is an editable project slot. Add a real project and its actual preview before publishing it."}</p>
+            <span className="dialog-status">CONTENT STATUS — AWAITING VERIFIED ASSETS</span>
+          </motion.div>
+        </motion.div>}
+      </AnimatePresence>
+    </section>
+  );
+}
+
+function BrowserBar({ title }: { title: string }) {
+  return <div className="browser-bar"><div className="browser-dots"><i /><i /><i /></div><span>{title}</span><div className="browser-menu">•••</div></div>;
+}
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [time, setTime] = useState("");
+  useEffect(() => {
+    const update = () => setTime(new Intl.DateTimeFormat("en", { timeZone: "Asia/Kathmandu", hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date()));
+    update(); const id = window.setInterval(update, 60000); return () => window.clearInterval(id);
+  }, []);
+
   return (
-    <main className="overflow-hidden">
-      <div className="noise" />
-      <header className="relative z-10 flex items-center justify-between px-6 py-6 md:px-12">
-        <a href="#" className="text-sm font-semibold tracking-[-.04em]">SK<span className="text-[#d5ff3f]">.</span></a>
-        <nav className="flex gap-6 text-[11px] uppercase tracking-[.16em] text-white/55 md:gap-10">
-          {nav.map((item) => <a key={item.label} href={item.href} className="transition-colors hover:text-[#d5ff3f]">{item.label}</a>)}
+    <main className="portfolio-shell">
+      <div className="grain" />
+      <header className="site-header">
+        <a className="brand-mark" href="#top" aria-label="Sarwzya Karki home">SK<span>®</span></a>
+        <nav className={menuOpen ? "nav-links nav-open" : "nav-links"}>
+          <a href="#work" onClick={() => setMenuOpen(false)}>WORK <sup>01</sup></a><a href="#about" onClick={() => setMenuOpen(false)}>ABOUT <sup>02</sup></a><a href="#contact" onClick={() => setMenuOpen(false)}>CONTACT <sup>03</sup></a>
         </nav>
-        <a href="#contact" className="hidden items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-[10px] uppercase tracking-[.14em] transition hover:border-[#d5ff3f] hover:text-[#d5ff3f] sm:flex">Let&apos;s talk <MoveUpRight size={13} /></a>
+        <div className="header-right"><span className="availability"><i /> AVAILABLE FOR IDEAS</span><span className="local-time">{time || "—"} NPT</span><button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? <X /> : <Menu />}</button></div>
       </header>
 
-      <section className="relative grid min-h-[84vh] items-center px-6 pb-24 pt-20 md:min-h-[88vh] md:px-12">
-        <div className="grid-lines absolute inset-0 opacity-30 [mask-image:linear-gradient(to_bottom,black,transparent_88%)]" />
-        <div className="relative z-[1] mx-auto w-full max-w-[1400px]">
-          <div className="mb-8 flex items-center gap-3 text-[10px] uppercase tracking-[.22em] text-white/45 reveal-up"><span className="h-2 w-2 rounded-full bg-[#d5ff3f] shadow-[0_0_16px_#d5ff3f]" /> Independent creative developer <span className="ml-auto hidden md:block">Portfolio / 2026</span></div>
-          <h1 className="reveal-up text-[clamp(4rem,12.8vw,12rem)] font-semibold leading-[.78] tracking-[-.095em]">
-            SARWZYA<br /><span className="outline-text">KARKI</span><span className="text-[#d5ff3f]">.</span>
-          </h1>
-          <div className="mt-12 flex flex-col justify-between gap-8 md:ml-[35%] md:flex-row md:items-end">
-            <p className="max-w-sm text-base leading-relaxed text-white/55 md:text-lg">I build digital experiences with a focus on thoughtful design, technology, and details that matter.</p>
-            <a href="#work" className="group flex h-14 w-14 items-center justify-center rounded-full bg-[#d5ff3f] text-black transition-transform hover:rotate-45"><ArrowDownRight size={25} /></a>
-          </div>
+      <section id="top" className="hero-section">
+        <div className="hero-meta"><span>INDEPENDENT CREATIVE DEVELOPER</span><span>BASED IN NEPAL · 27°N 85°E</span></div>
+        <div className="hero-title-wrap"><motion.div className="hero-kicker" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .15, duration: .7 }}>DIGITAL EXPERIENCES / 2026</motion.div>
+          <motion.h1 initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: .045, delayChildren: .25 } } }}>
+            {"SARWZYA".split("").map((letter, i) => <motion.span key={i} variants={{ hidden: { y: "110%", opacity: 0, filter: "blur(12px)" }, visible: { y: "0%", opacity: 1, filter: "blur(0px)", transition: { duration: .9, ease: [0.16, 1, 0.3, 1] } } }}>{letter}</motion.span>)}
+          </motion.h1>
+          <div className="hero-second-line"><motion.h1 className="outline-name" initial={{ clipPath: "inset(0 100% 0 0)" }} animate={{ clipPath: "inset(0 0% 0 0)" }} transition={{ delay: .75, duration: 1.15, ease: [0.76, 0, 0.24, 1] }}>KARKI<span className="acid">.</span></motion.h1><motion.p initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.1, duration: .8 }}>I MAKE THE<br />INTERNET FEEL<br /><em>DIFFERENT.</em></motion.p></div>
         </div>
-        <div className="absolute bottom-6 left-6 right-6 flex justify-between text-[9px] uppercase tracking-[.2em] text-white/30 md:left-12 md:right-12"><span>Scroll to explore</span><span>Design · Code · Ideas</span></div>
+        <div className="hero-bottom"><span className="hero-asterisk"><Asterisk size={18} /> DESIGN-LED DEVELOPMENT</span><p>Curiosity first. Craft always.<br />Building ideas into digital experiences.</p><a href="#work" className="scroll-cue"><span>SCROLL TO EXPLORE</span><ArrowDown size={16} /></a></div>
+        <div className="hero-side-index">PORTFOLIO / 001 — 026</div>
       </section>
 
-      <section id="work" className="px-6 py-24 md:px-12 md:py-36">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="mb-12 flex items-end justify-between border-b border-white/15 pb-5"><div><p className="mb-3 text-[10px] uppercase tracking-[.2em] text-[#d5ff3f]">01 / Selected work</p><h2 className="text-4xl tracking-[-.07em] md:text-6xl">Things I&apos;ve made<span className="text-[#d5ff3f]">.</span></h2></div><span className="hidden text-xs text-white/35 md:block">A growing collection</span></div>
-          <a href="#contact" className="project-card group relative block overflow-hidden rounded-sm border border-white/15 bg-[#11120d] p-6 md:p-12">
-            <div className="absolute right-0 top-0 h-full w-[65%] opacity-70" style={{background:"radial-gradient(ellipse at 70% 45%, rgba(213,255,63,.18), transparent 55%)"}} />
-            <div className="relative z-[1] flex min-h-[330px] flex-col justify-between md:min-h-[420px]">
-              <div className="flex items-center justify-between text-[10px] uppercase tracking-[.2em] text-white/40"><span>Featured project / 01</span><span>AI · Product</span></div>
-              <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-                <div><p className="mb-3 text-sm text-[#d5ff3f]">A project by Sarwzya</p><h3 className="text-[clamp(3.5rem,9vw,8rem)] font-semibold leading-[.8] tracking-[-.09em]">KARKI AI<span className="text-[#d5ff3f]">.</span></h3><p className="mt-6 max-w-md text-sm leading-relaxed text-white/45">An AI project. A closer look at the product and its experience is coming soon.</p></div>
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/25 transition group-hover:border-[#d5ff3f] group-hover:bg-[#d5ff3f] group-hover:text-black"><ArrowUpRight size={22} /></span>
-              </div>
-            </div>
-          </a>
-          <p className="mt-5 text-[10px] uppercase tracking-[.18em] text-white/30">More work will appear here as projects are ready to share.</p>
-        </div>
+      <div className="ticker" aria-hidden="true"><div className="ticker-track">{Array.from({ length: 4 }).map((_, i) => <span key={i}>DESIGN WITH INTENT <b>✳</b> CODE WITH CURIOSITY <b>✳</b> MAKE SOMETHING MATTER <b>✳</b></span>)}</div></div>
+
+      <FloatingUniverse />
+
+      <section id="about" className="about-section">
+        <div className="section-topline"><span>02 / THE PERSON BEHIND THE PIXELS</span><span>A SHORT INTRODUCTION</span></div>
+        <div className="about-grid"><div className="about-stamp"><Command size={26} /><span>THINK<br />MAKE<br />REFINE</span><Asterisk size={34} /></div><div className="about-copy"><p className="eyebrow">A LITTLE ABOUT ME</p><h2>NOT HERE TO<br />MAKE MORE OF<br /><span>THE SAME.</span></h2><p className="about-description">I’m Sarwzya Karki. I’m interested in the intersection of design, technology and interaction — exploring how thoughtful details can turn a website into an experience.</p><p className="about-placeholder">This introduction is editable. Add a personal story and verified background here.</p></div></div>
       </section>
 
-      <section id="about" className="border-y border-white/10 px-6 py-24 md:px-12 md:py-32">
-        <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-[.7fr_1.3fr]">
-          <div><p className="mb-3 text-[10px] uppercase tracking-[.2em] text-[#d5ff3f]">02 / A little about me</p><h2 className="text-4xl tracking-[-.07em] md:text-5xl">Curious by<br />nature<span className="text-[#d5ff3f]">.</span></h2></div>
-          <div className="max-w-2xl"><Asterisk className="mb-8 text-[#d5ff3f]" size={34} /><p className="text-2xl leading-[1.35] tracking-[-.04em] text-white/75 md:text-4xl">I enjoy exploring the space where design and technology meet — turning ideas into digital experiences that feel clear, useful, and memorable.</p><p className="mt-8 text-sm leading-relaxed text-white/40">This portfolio is a work in progress. More about me, my process, and the projects I can share will be added as they take shape.</p></div>
-        </div>
-      </section>
+      <section className="toolkit-section"><div className="section-topline"><span>03 / CREATIVE TOOLKIT</span><span>TOOLS ARE ONLY THE START</span></div><div className="toolkit-layout"><h2>THE<br /><span>TOOLBOX.</span></h2><div className="toolkit-list"><div><span>01</span><p>FRONTEND DEVELOPMENT</p><small>Next.js · React · TypeScript</small></div><div><span>02</span><p>MOTION & INTERACTION</p><small>GSAP · Framer Motion</small></div><div><span>03</span><p>DESIGN & PROTOTYPING</p><small>Tools and proficiency to be confirmed</small></div></div></div></section>
 
-      <section id="contact" className="px-6 py-28 md:px-12 md:py-40">
-        <div className="mx-auto max-w-[1400px]">
-          <p className="mb-8 text-[10px] uppercase tracking-[.2em] text-[#d5ff3f]">03 / Get in touch</p>
-          <h2 className="max-w-5xl text-[clamp(3.4rem,10vw,9rem)] font-semibold leading-[.82] tracking-[-.09em]">HAVE AN IDEA?<br /><span className="outline-text">LET&apos;S MAKE IT.</span></h2>
-          <a href="#about" className="mt-12 inline-flex items-center gap-3 border-b border-[#d5ff3f] pb-3 text-sm text-[#d5ff3f] transition hover:gap-6">Contact details coming soon <MoveUpRight size={16} /></a>
-        </div>
-      </section>
+      <section id="contact" className="contact-section"><div className="section-topline"><span>04 / START A CONVERSATION</span><span>THE NEXT THING STARTS HERE</span></div><p className="eyebrow">HAVE SOMETHING INTERESTING IN MIND?</p><h2>LET’S MAKE<br /><span>IT MATTER.</span></h2><p className="contact-note">Have an idea, a question, or something worth building? Reach out.</p><a className="contact-link" href="mailto:">EMAIL ADDRESS TO BE ADDED <MoveUpRight size={17} /></a></section>
 
-      <footer className="flex flex-col justify-between gap-4 border-t border-white/10 px-6 py-6 text-[10px] uppercase tracking-[.16em] text-white/35 md:flex-row md:px-12"><span>© 2026 Sarwzya Karki</span><span>Made with intention <span className="text-[#d5ff3f]">✳</span></span><a href="#" className="hover:text-white">Back to top ↑</a></footer>
+      <footer className="site-footer"><a className="brand-mark" href="#top">SK<span>®</span></a><span>© 2026 SARWZYA KARKI</span><span>MADE WITH INTENTION <b>✳</b></span><div className="social-links"><a href="https://github.com/karkihubbb" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={16} /></a><a href="#contact" aria-label="Instagram link to be added"><Instagram size={16} /></a><a href="#contact" aria-label="LinkedIn link to be added"><Linkedin size={16} /></a></div></footer>
     </main>
   );
 }
