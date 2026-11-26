@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -79,3 +79,87 @@ a{color:inherit;text-decoration:none}button{font:inherit;color:inherit}
  .hero-second-line p{font-size:12px;line-height:1.02;padding-top:5px}
  .manifesto-line{font-size:15.5vw}
 }
+
+/* REBUILD / dark spatial editorial direction */
+:root{--bg:#080908;--fg:#f0f0e9;--muted:#888b80;--line:rgba(240,240,233,.14);--acid:#c8f34a}
+body{font-family:'Space Grotesk',Manrope,sans-serif}
+.site-header{height:76px}
+.hero-section{min-height:calc(100svh - 76px);padding-top:26px;padding-bottom:30px;background-size:64px 64px}
+.hero-section:before{background:radial-gradient(ellipse at 53% 48%,rgba(200,243,74,.09),transparent 52%)}
+.hero-title-wrap{max-width:1600px;padding:6vh 0 8vh}
+.hero-title-wrap h1,.hero-second-line .outline-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(88px,17.7vw,260px);font-weight:700;letter-spacing:-.115em}
+.hero-kicker{font-size:10px;letter-spacing:.2em;margin-bottom:26px}
+.hero-second-line{padding-top:3vw}
+.hero-second-line p{font-size:clamp(17px,2vw,29px);font-weight:700;line-height:.98;letter-spacing:-.07em}
+.hero-bottom>p{font-size:13px;font-weight:500;color:#b4b7ac}
+.ticker{height:52px;background:#0c0e0b}
+.ticker-track span{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.16em}
+.universe-section{padding-top:110px;padding-bottom:115px}
+.universe-heading{padding:66px 0 48px;display:grid;grid-template-columns:1fr auto;align-items:end;column-gap:30px}
+.universe-heading>p{grid-column:1/-1;margin:0 0 24px}
+.universe-heading h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(76px,12.5vw,178px);font-weight:700;line-height:.77;letter-spacing:-.105em;margin:0}
+.universe-heading h2 span:not(.acid){color:transparent;-webkit-text-stroke:1px rgba(240,240,233,.65)}
+.work-intro{max-width:280px;padding-bottom:5px}
+.work-intro p{font-size:15px;line-height:1.45;color:#c2c5b9;margin:0 0 18px;font-weight:500}
+.work-intro span{font:8px 'DM Mono',monospace;letter-spacing:.12em;color:var(--acid)}
+.universe-stage{height:min(850px,72vw);min-height:650px;border:1px solid rgba(240,240,233,.16);background:radial-gradient(ellipse at 50% 48%,rgba(200,243,74,.10),transparent 42%),linear-gradient(135deg,#10130e,#080908 72%)}
+.universe-stage:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.035) 50%,transparent 65%);opacity:.7}
+.ring-a{width:82%;height:82%;border-color:rgba(200,243,74,.19)}
+.ring-b{width:61%;height:62%;border-color:rgba(240,240,233,.12)}
+.browser-window{border-color:rgba(240,240,233,.34);box-shadow:0 45px 120px #000b,0 0 0 1px #ffffff0a;backdrop-filter:blur(10px)}
+.window-one{width:46%;height:69%;left:27%;top:13%;transform:rotateY(-10deg) rotateX(2deg)}
+.window-two{width:31%;height:49%;left:4%;top:27%;transform:rotateY(18deg) rotateZ(-5deg)}
+.window-three{width:29%;height:47%;right:4%;top:31%;transform:rotateY(-20deg) rotateZ(5deg)}
+.browser-bar{height:36px;background:#191d16;color:#aeb39f}
+.browser-dots i{width:6px;height:6px}
+.preview-karki{height:calc(100% - 36px);padding:7% 8% 6%;position:relative;overflow:hidden;background:radial-gradient(ellipse at 74% 35%,#c8f34a2c,transparent 43%),linear-gradient(145deg,#151a11,#090b08 75%)}
+.preview-karki:after{content:"";position:absolute;width:65%;height:65%;right:-10%;bottom:-20%;border:1px solid #c8f34a4a;border-radius:50%;box-shadow:0 0 0 28px #c8f34a08,0 0 0 60px #c8f34a05}
+.preview-karki-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(48px,7.2vw,108px);line-height:.76;letter-spacing:-.11em;z-index:1}
+.preview-karki-title i{-webkit-text-stroke:1.2px var(--acid)}
+.preview-ui-lines{display:flex;gap:7px;position:absolute;bottom:25%;left:8%;width:58%;height:20px}
+.preview-ui-lines i{display:block;height:100%;border:1px solid #ffffff30;background:#ffffff08;flex:1}
+.preview-ui-lines i:first-child{flex:2;background:#c8f34a1c;border-color:#c8f34a60}
+.preview-karki-foot{z-index:2}
+.preview-empty{background:linear-gradient(145deg,#171b14,#0b0d0a);border-top:1px solid #ffffff0c}
+.preview-empty-mark{font-size:50px;color:#c8f34a}
+.preview-empty p{font-size:9px;letter-spacing:.16em;color:#b4baa9}
+.preview-empty small{color:#818875}
+.preview-empty-light{background:linear-gradient(145deg,#d9dfc8,#9da78c)}
+.preview-empty-light .preview-empty-mark{color:#3e4d20}
+.preview-empty-light p{color:#252b1e}
+.preview-empty-light small{color:#4c563d}
+.universe-note{font-size:9px;letter-spacing:.15em}
+.universe-caption{padding-top:19px;color:#92988a}
+.about-section{padding-top:130px}
+.about-copy h2,.toolkit-layout h2,.contact-section h2{font-family:'Space Grotesk',sans-serif;font-weight:700}
+.about-description{font-family:'Space Grotesk',sans-serif;font-size:clamp(19px,2.35vw,29px);font-weight:500}
+.toolkit-section{background:#10120e;border-top:1px solid #ffffff12;border-bottom:1px solid #ffffff12}
+.toolkit-list p{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;letter-spacing:.05em}
+.contact-section h2{font-weight:700}
+.contact-note{font-weight:500}
+.site-footer{font-size:9px}
+.manifesto-section{display:none!important}
+@media(max-width:800px){
+ .site-header{height:68px}
+ .hero-section{min-height:calc(90svh - 68px)}
+ .universe-section{padding-top:78px;padding-bottom:80px}
+ .universe-heading{grid-template-columns:1fr;gap:24px;padding:50px 0 32px}
+ .universe-heading h2{font-size:15vw}
+ .work-intro{max-width:360px}
+ .universe-stage{height:620px;min-height:0}
+ .window-one{width:68%;height:52%;left:16%;top:21%}
+ .window-two{width:48%;height:37%;left:-1%;top:12%}
+ .window-three{width:47%;height:36%;right:-1%;top:54%}
+ .preview-karki-title{font-size:13vw}
+}
+@media(max-width:520px){
+ .universe-heading h2{font-size:16vw}
+ .universe-stage{height:510px}
+ .window-one{width:76%;height:47%;left:12%;top:24%}
+ .window-two{width:53%;height:33%;left:-5%;top:11%}
+ .window-three{width:52%;height:31%;right:-5%;top:57%}
+ .preview-karki-title{font-size:15vw}
+ .preview-ui-lines{height:12px}
+ .universe-note{font-size:6px}
+}
+@media(prefers-reduced-motion:reduce){.ticker-track{animation:none}}
