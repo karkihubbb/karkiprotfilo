@@ -37,13 +37,13 @@ function FloatingUniverse() {
   return (
     <section id="work" className="universe-section">
       <div className="section-topline"><span>01 / SELECTED WORK</span><span>AN OPEN CANVAS — 2026</span></div>
-      <div className="universe-heading"><p>MADE TO MOVE.</p><h2>WORK<span> / </span>IN<br className="mobile-break" /> PROGRESS<span className="acid">.</span></h2></div>
+      <div className="universe-heading"><p>SELECTED WORK / 001—003</p><h2>IDEAS IN<br /><span>ORBIT.</span></h2><div className="work-intro"><p>A small universe of things I’m building, exploring and bringing to life.</p><span>MOVE YOUR CURSOR TO SHIFT THE SPACE ↗</span></div></div>
       <div ref={area} className="universe-stage">
         <motion.div className="universe-orbit" style={{ x: sx, y: sy }}>
           <div className="orbit-ring ring-a" /><div className="orbit-ring ring-b" />
           <motion.button className="browser-window window-one" onClick={() => setActive("01")} whileHover={{ scale: 1.035, zIndex: 8 }} animate={{ y: [0, -13, 0], rotate: [-5, -3.5, -5] }} transition={{ y: { duration: 7, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 9, repeat: Infinity, ease: "easeInOut" } }}>
             <BrowserBar title="karki-ai / overview" />
-            <div className="preview-karki"><span className="preview-index">01 — FEATURED PROJECT</span><div className="preview-karki-title">KARKI<br /><i>AI.</i></div><div className="preview-karki-foot"><span>PRODUCT / AI</span><span>OPEN PROJECT ↗</span></div></div>
+            <div className="preview-karki"><span className="preview-index">01 — LIVE PRODUCT / KARKI AI</span><div className="preview-karki-title">THINK<br /><i>BEYOND.</i></div><div className="preview-ui-lines"><i/><i/><i/></div><div className="preview-karki-foot"><span>AI PRODUCT</span><span>OPEN CASE ↗</span></div></div>
           </motion.button>
           <motion.button className="browser-window window-two" onClick={() => setActive("02")} whileHover={{ scale: 1.04, zIndex: 8 }} animate={{ y: [0, 15, 0], rotate: [7, 5, 7] }} transition={{ y: { duration: 8, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 10, repeat: Infinity, ease: "easeInOut" } }}>
             <BrowserBar title="project-preview / 02" /><div className="preview-empty"><span>02</span><div className="preview-empty-mark">＋</div><p>REAL PROJECT<br />PREVIEW NEEDED</p><small>ASSET SLOT / 02</small></div>
@@ -56,15 +56,15 @@ function FloatingUniverse() {
         <div className="universe-note note-right">SELECT A WINDOW<br />TO INSPECT <ArrowUpRight size={14} /></div>
         <div className="universe-crosshair">✳</div>
       </div>
-      <div className="universe-caption"><span>THREE WINDOWS / ONE CREATIVE UNIVERSE</span><span>PROJECTS OPEN AS THEY BECOME REAL</span></div>
+      <div className="universe-caption"><span>01 — KARKI AI / LIVE PRODUCT</span><span>02—03 — EXPERIMENTAL SPACE / IN DEVELOPMENT</span></div>
       <AnimatePresence>
         {active && <motion.div className="project-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
           <motion.div className="project-dialog" initial={{ y: 40, scale: .97 }} animate={{ y: 0, scale: 1 }} exit={{ y: 20, scale: .98 }}>
             <button className="dialog-close" onClick={() => setActive(null)} aria-label="Close project"><X size={20} /></button>
             <span className="eyebrow">PROJECT / {active}</span>
             <h3>{active === "01" ? "KARKI AI" : active === "02" ? "PROJECT TWO" : "PROJECT THREE"}</h3>
-            <p>{active === "01" ? "Karki AI is a live project. Explore the actual product and its current interface." : "This is an editable project slot. Add a real project and its actual preview before publishing it."}</p>
-            <span className="dialog-status">LIVE PROJECT · KARKIAI.ONRENDER.COM</span>{active === "01" && <a className="dialog-visit" href="https://karkiai.onrender.com/" target="_blank" rel="noreferrer">VISIT LIVE PROJECT <MoveUpRight size={16} /></a>}
+            <p>{active === "01" ? "Karki AI — a live AI product. Visit the product to explore its current experience." : "An open space for future experiments. This preview will be replaced when a real project is ready."}</p>
+            <span className="dialog-status">{active === "01" ? "LIVE PRODUCT · KARKIAI.ONRENDER.COM" : "EXPERIMENTAL SPACE · IN DEVELOPMENT"}</span>{active === "01" && <a className="dialog-visit" href="https://karkiai.onrender.com/" target="_blank" rel="noreferrer">VISIT LIVE PROJECT <MoveUpRight size={16} /></a>}
           </motion.div>
         </motion.div>}
       </AnimatePresence>
@@ -116,7 +116,7 @@ export default function Home() {
         <div className="hero-side-index">PORTFOLIO / 001 — 026</div>
       </section>
 
-      <section className="manifesto-section"><div className="manifesto-index">A POINT OF VIEW / 001</div><p className="manifesto-line">THE INTERNET<br /><span>DOESN’T NEED</span><br />MORE OF THE <em>SAME.</em></p><div className="manifesto-bottom"><span>DESIGN × CODE × INTERACTION</span><p>Distinct digital experiences, built with intention — from the first sketch to the final interaction.</p></div></section>\n\n      <div className="ticker" aria-hidden="true"><div className="ticker-track">{Array.from({ length: 4 }).map((_, i) => <span key={i}>DESIGN WITH INTENT <b>✳</b> CODE WITH CURIOSITY <b>✳</b> MAKE SOMETHING MATTER <b>✳</b></span>)}</div></div>
+      <div className="ticker" aria-hidden="true"><div className="ticker-track">{Array.from({ length: 4 }).map((_, i) => <span key={i}>DESIGN WITH INTENT <b>✳</b> CODE WITH CURIOSITY <b>✳</b> MAKE SOMETHING MATTER <b>✳</b></span>)}</div></div>
 
       <FloatingUniverse />
 
